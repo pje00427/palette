@@ -25,3 +25,12 @@ replay_pid*
 ### Palette custom ###
 .env
 .env.local
+.idea/
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Gradle ###
+.gradle/
+build/
