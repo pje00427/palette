@@ -23,10 +23,6 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
-  mybatis:
-    mapper-locations: classpath:mapper/**/*.xml
-    configuration:
-      map-underscore-to-camel-case: true
 
 server:
   port: 8081
