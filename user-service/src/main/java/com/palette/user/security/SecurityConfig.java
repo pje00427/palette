@@ -40,7 +40,9 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 // JWT 필터를 Spring Security 필터 앞에 추가
                 .addFilterBefore(new JwtAuthenticationFilter(jwtUtil),
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                .formLogin(AbstractHttpConfigurer::disable) // 오류로 추가해봄
+                .httpBasic(AbstractHttpConfigurer::disable);
 
         return http.build();
     }

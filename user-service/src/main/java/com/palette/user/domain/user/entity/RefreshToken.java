@@ -1,17 +1,19 @@
 package com.palette.user.domain.user.entity;
 
-import com.palette.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Table(name = "refresh_tokens")
 @Entity
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RefreshToken extends BaseEntity {
+public class RefreshToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,11 @@ public class RefreshToken extends BaseEntity {
     LocalDateTime expiresAt;
 
     LocalDateTime revokedAt;
+
+    // BaseEntity 상속 안 하므로 createdAt만 직접 선언
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    LocalDateTime createdAt;
 
     @Builder
     public RefreshToken(Long userId, String token, LocalDateTime expiresAt) {
