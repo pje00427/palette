@@ -23,22 +23,20 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
-  mybatis:
-    mapper-locations: classpath:mapper/**/*.xml
-    configuration:
-      map-underscore-to-camel-case: true
-
   data:
     redis:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD}
-
   cache:
     type: redis
     redis:
       time-to-live: 300000
-
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.palette.product
+  configuration:
+    map-underscore-to-camel-case: true
 server:
   port: 8082
 
