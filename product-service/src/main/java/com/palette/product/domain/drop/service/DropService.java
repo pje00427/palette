@@ -2,6 +2,7 @@ package com.palette.product.domain.drop.service;
 
 import com.palette.common.exception.DomainException;
 import com.palette.product.domain.drop.dto.request.DropCreateRequest;
+import com.palette.product.domain.drop.dto.request.DropSearchRequest;
 import com.palette.product.domain.drop.dto.response.DropResponse;
 import com.palette.product.domain.drop.entity.Drop;
 import com.palette.product.domain.drop.mapper.DropMapper;
@@ -58,5 +59,10 @@ public class DropService {
         Drop drop = dropRepository.findByIdAndDeletedAtIsNull(dropId)
                 .orElseThrow(() -> new DomainException(ProductExceptionCode.NOT_FOUND_DROP));
         drop.cancel();
+    }
+    // 드롭 동적 검색 — MyBatis 읽기
+    @Transactional(readOnly = true)
+    public List<DropResponse> searchDrops(DropSearchRequest request) {
+        return dropMapper.search(request);
     }
 }

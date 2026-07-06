@@ -64,4 +64,25 @@
         ORDER BY d.scheduled_at ASC
     </select>
 
+    <!-- 동적 검색 — status / productId 선택 필터 -->
+    <select id="search" parameterType="DropSearchRequest" resultMap="dropResultMap">
+        SELECT d.id,
+            d.product_id,
+            p.name AS product_name,
+            d.scheduled_at,
+            d.end_at,
+            d.total_quantity,
+            d.status,
+            d.created_at
+        FROM drops d
+        JOIN products p ON d.product_id = p.id
+        WHERE d.deleted_at IS NULL
+        <if test="status != null">
+            AND d.status = #{status}
+        </if>
+        <if test="productId != null">
+            AND d.product_id = #{productId}
+        </if>
+        ORDER BY d.scheduled_at DESC
+    </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.palette.product.domain.drop.controller;
 
 import com.palette.common.response.ApiResponse;
 import com.palette.product.domain.drop.dto.request.DropCreateRequest;
+import com.palette.product.domain.drop.dto.request.DropSearchRequest;
 import com.palette.product.domain.drop.dto.response.DropResponse;
 import com.palette.product.domain.drop.service.DropService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,5 +48,12 @@ public class DropController {
     @GetMapping("/drops/{id}")
     public ResponseEntity<ApiResponse<DropResponse>> getDrop(@PathVariable Long id) {
         return ApiResponse.ok(dropService.getDrop(id));
+    }
+    // 드롭 동적 검색
+    @Operation(summary = "드롭 검색 (status / productId 필터)")
+    @GetMapping("/drops/search")
+    public ResponseEntity<ApiResponse<List<DropResponse>>> searchDrops(
+            DropSearchRequest request) {
+        return ApiResponse.ok(dropService.searchDrops(request));
     }
 }
