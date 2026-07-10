@@ -11,4 +11,7 @@ public interface DropNotificationRepository extends JpaRepository<DropNotificati
 
     // 드롭 오픈 시 알림 미발송 대상자 조회 (추후 알림 발송용)
     List<DropNotification> findAllByDropIdAndIsNotifiedFalse(Long dropId);
+
+    // 사용자가 신청한 알림 목록 (최신순)
+    List<DropNotification> findByUserIdOrderByCreatedAtDesc(Long userId);
 }
