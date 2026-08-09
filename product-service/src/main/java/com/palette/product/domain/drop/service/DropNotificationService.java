@@ -39,11 +39,9 @@ public class DropNotificationService {
 
         // 3️⃣ 새로운 알림 신청 생성
         DropNotification notification = DropNotification.builder()
-                .drop(drop)
-                .userId(userId)
-                .isNotified(false)  // 초기값: 아직 알림 안 보냄
-                .build();
-
+            .drop(drop)
+            .userId(userId)
+            .build();
         // 4️⃣ DB에 저장
         dropNotificationRepository.save(notification);
 
